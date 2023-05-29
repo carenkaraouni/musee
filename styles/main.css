@@ -41,7 +41,8 @@
     
 .boutique{
     display: flex;
-        justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .card{
@@ -51,7 +52,9 @@
     box-shadow: 5px 5px 20px black;
     background-color: rgb(135, 175, 175);
         display: inline-block;
-  
+        
+        
+   
 
 }
 

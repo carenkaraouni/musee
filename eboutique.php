@@ -14,11 +14,12 @@
   <h3>Voici les articles que vous retrouverez au magasin du musee</h3>
 </div>
 
-<div class="boutique"></div>
+<div class="boutique">
     <div class="card">
     <img src="img/jocondequidab.jpg"/>
     <div class="intro">
         <h1>La Joconde 25£</h1>
+    </div>
     </div>
 
 
@@ -28,8 +29,9 @@
         <h1>La Nuit etoile 6£</h1>
     </div>
     </div>
+    </div>
 
-
+<div class="boutique">
     <div class="card">
     <img src="img/oreiller.jpg"/>
     <div class="intro">
@@ -37,11 +39,13 @@
             25£
         </h1>
     </div>
+    </div>
 
     <div class="card">
     <img src="img/livre.jpg"/>
     <div class="intro">
-        <h1>De Renoir a Picasso 20£</h1>
+        <h1>Livre Picasso 20£</h1>
+    </div>
     </div>
     <div class="card">
     <img src="img/assiette.jpg"/>
@@ -49,13 +53,12 @@
         <h1>Assiette Picasso 5£</h1>
     </div>
     </div>
-    <div class="card">
-    <img src="img/dali-porte-cle.webp"/>
-    <div class="intro">
-        <h1>Porte clés Dali 5£</h1>
     </div>
     </div>
-    </div>
+
+    
+    
+    
 </body>
 </html>
 
@@ -78,3 +81,4 @@
 
 </style>
 
+<?php require_once('footer.php');?>

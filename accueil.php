@@ -1,3 +1,36 @@
+<?php
+require_once('functions.php');
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$bdd = connect();
+
+$sql = "SELECT * FROM oeuvre WHERE categories_id = :categories_id";
+
+$sth = $bdd->prepare($sql);
+
+$sth->execute([
+    'categories_id' => $_SESSION['user']['id']
+]);
+
+$persos = $sth->fetchAll();
+
+?>
+
+<?php require_once('_nav.php'); ?>
+<?php require_once('barre.php'); ?>
+
+
+
+
+
+<!-- Fermez les balises HTML manquantes -->
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +42,7 @@
 
 <body>
     
-<?php require_once('_header.php');
-require_once('barre.php'); ?>
+
 
 
 <video autoplay muted loop class="video">
@@ -35,16 +67,25 @@ require_once('barre.php'); ?>
 </style>
 
 </body>
+
 </html>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+</style>
 
 
-<!--<footer>
-  <div class="footer backGris">
-    <div>
-      <h3>A propos </h3>
-      <p>Contact</p>
-      <p>Note</p>
-      <p>Adresse</p>
-    </div>
-  </div>
-</footer>
+
+    
