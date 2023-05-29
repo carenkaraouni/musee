@@ -13,3 +13,5 @@ if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 ?>
+
+<a href="accueil2">Retour</a>
