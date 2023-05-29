@@ -1,55 +1,80 @@
-<a class="btn btn-grey" href="acceuil2.php">Retour</a><?php
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-//$host = "localhost";
-//$db_user = "nom_utilisateur";
-/*$db_password = "mot_de_passe";
-$db_name = "musee";
-$conn = mysqli_connect($host, $db_user, $db_password, $db_name);
+    <style>
+        .wrapper{
+            width: 700px;
+            margin: 0 auto;
+        }
+        table tr td:last-child{
+            width: 120px;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 d-flex justify-content-between">
+                        <h2 class="pull-left">Liste des Utilisateurs</h2>
+                        <a href="register.php" class="btn btn-success"><i class="bi bi-plus"></i> Ajouter</a>
+                    </div>
+                    <?php
 
-// Vérifier si l'utilisateur est connecté en tant qu'administrateur
-session_start();*/
-
-
-$bdd = connect();
-
-$sql = "SELECT * FROM users WHERE statut='inactive'";
-
-$sth = $bdd->prepare($sql);
-
-$persos = $sth->fetchAll();
-
-$result = $conn->query($sql);
-?>
-
-<tr>
-    <td>id</td>
-    <td>email</td>
-    <td>Nom</td>
-    <td>adresse</td>
-            </tr>  
-
-            <tr>
-                    <td><?php echo $users['id']; ?></td>
-                    <td><?php echo $users['email']; ?></td>
-                    <td><?php echo $users['mail']; ?></td>
-                    <td><?php echo $users['adresse']; ?></td>
-                    <td>
-
-                    $result = $conn->query($sql);
-
-<!--if ($result->num_rows > 0) {
-    echo "<h1>Utilisateurs à valider :</h1>";
-    while ($row = $result->fetch_assoc()) {
-        $userId = $row['id'];
-        $userName = $row['nom'];
-        $userEmail = $row['email'];
-        // Affichez les informations de l'utilisateur
-        echo "<p>Nom : $userName<br>Email : $userEmail</p>";
-    }
-} else {
-    echo "Aucun utilisateur à valider.";
-}
-
-// Fermeture de la connexion à la base de données
-$conn->close();
-?>
+                    // Inclure le fichier config
+                    require_once "db_connect.php";
+                    // select query execution
+                    $sql = "SELECT * FROM users";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo '<table class="table table-bordered table-striped">';
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th>#</th>";
+                                        echo "<th>Prenom</th>";
+                                        echo "<th>Nom</th>";
+                                        echo "<th>Email</th>";
+                                        echo "<th>Action</th>";
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['id'] . "</td>";
+                                        echo "<td>" . $row['prenom'] . "</td>";
+                                        echo "<td>" . $row['name'] . "</td>";
+                                        echo "<td>" . $row['email'] . "</td>";
+                                        echo "<td>";
+                                            echo '<a href="read.php?id='. $row['id'] .'" class="me-3" ><span class="bi bi-eye"></span></a>';
+                                            echo '<a href="update.php?id='. $row['id'] .'" class="me-3" ><span class="bi bi-pencil"></span></a>';
+                                            echo '<a href="valid.php?id='. $row['id'] .'" ><span class="bi bi-check"></span></a>';
+                                        echo "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo '<div class="alert alert-danger"><em>Pas d\'enregistrement</em></div>';
+                        }
+                    } else{
+                        echo "Oops! Une erreur est survenue";
+                    }
+ 
+                    // Fermer connection
+                    mysqli_close($link);
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+</body>
+</html>
